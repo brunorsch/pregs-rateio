@@ -1,0 +1,4 @@
+micronaut.application.name: pregsrateio
+
+mongodb:
+  uri: mongodb://root:development@localhost:27017/pregsrateio

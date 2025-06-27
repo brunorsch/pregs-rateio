@@ -8,7 +8,7 @@ plugins {
 }
 
 version = "0.1"
-group = "br.dev.brunorsch"
+group = "br.dev.brunorsch.pregsrateio"
 
 repositories {
     mavenCentral()
@@ -17,19 +17,26 @@ repositories {
 dependencies {
     ksp("io.micronaut:micronaut-http-validation")
     ksp("io.micronaut.serde:micronaut-serde-processor")
+    ksp("io.micronaut.data:micronaut-data-document-processor")
+
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
+    implementation("io.micronaut.data:micronaut-data-mongodb")
+
     compileOnly("io.micronaut:micronaut-http-client")
+
+    runtimeOnly("org.mongodb:mongodb-driver-sync")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
+
     testImplementation("io.micronaut:micronaut-http-client")
 }
 
 
 application {
-    mainClass = "br.dev.brunorsch.ApplicationKt"
+    mainClass = "br.dev.brunorsch.pregsrateio.ApplicationKt"
 }
 java {
     sourceCompatibility = JavaVersion.toVersion("21")
@@ -43,7 +50,7 @@ micronaut {
     testRuntime("junit5")
     processing {
         incremental(true)
-        annotations("br.dev.brunorsch.*")
+        annotations("br.dev.brunorsch.pregsrateio.*")
     }
     aot {
         // Please review carefully the optimizations enabled below
