@@ -1,4 +1,15 @@
-micronaut.application.name: pregsrateio
+micronaut:
+  application:
+    name: pregsrateio
+  router:
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**
+      redoc:
+        paths: classpath:META-INF/swagger/views/redoc
+        mapping: /docs/**
+
 
 mongodb:
   uri: mongodb://root:development@localhost:27017/pregsrateio
