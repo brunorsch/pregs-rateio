@@ -1,0 +1,10 @@
+micronaut:
+  security:
+    enabled: true
+    intercept-url-map:
+      - pattern: /docs/**
+        http-method: GET
+        access: isAnonymous()
+      - pattern: /swagger/**
+        http-method: GET
+        access: isAnonymous()

@@ -9,7 +9,18 @@ micronaut:
       redoc:
         paths: classpath:META-INF/swagger/views/redoc
         mapping: /docs/**
-
+  security:
+    enabled: true
+    token:
+      jwt:
+        enabled: true
+        signatures:
+          jwks:
+            auth0:
+              url: "https://pregs.auth0.com/.well-known/jwks.json"
+        claims-validators:
+          audience:
+            - "https://api.pregsrateio.app.br"
 
 mongodb:
   uri: mongodb://root:development@localhost:27017/pregsrateio

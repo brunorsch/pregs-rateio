@@ -1,0 +1,2 @@
+# App para teste com login
+Um app de exemplo do Auth0 que foi adaptado para permitir testar o login e obter o JWT do usuário. Util para testes com back-end, já que os clients não suportam login diretamente por falta de suporte ao login page do Auth0.
