@@ -17,4 +17,3 @@ object ApplicationKt {
 		run(*args)
 	}
 }
-
