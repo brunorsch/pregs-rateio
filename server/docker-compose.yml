@@ -1,9 +1,10 @@
 version: '3.8'
 
+name: pregsrateio-server-dev
+
 services:
   mongo:
     image: mongo:7.0.9
-    container_name: mongo
     restart: always
     ports:
       - "27017:27017"

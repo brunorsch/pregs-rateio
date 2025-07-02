@@ -19,6 +19,7 @@ dependencies {
     ksp("io.micronaut.serde:micronaut-serde-processor")
     ksp("io.micronaut.data:micronaut-data-document-processor")
     ksp("io.micronaut.openapi:micronaut-openapi")
+    ksp("io.micronaut.serde:micronaut-serde-processor")
 
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
@@ -27,6 +28,8 @@ dependencies {
     implementation("io.micronaut.data:micronaut-data-mongodb")
     implementation("io.micronaut.security:micronaut-security")
     implementation("io.micronaut.security:micronaut-security-jwt")
+    implementation("io.micronaut.serde:micronaut-serde-jackson")
+    implementation("io.micronaut.serde:micronaut-serde-bson")
 
     compileOnly("io.micronaut:micronaut-http-client")
     compileOnly("io.micronaut.openapi:micronaut-openapi-annotations")
