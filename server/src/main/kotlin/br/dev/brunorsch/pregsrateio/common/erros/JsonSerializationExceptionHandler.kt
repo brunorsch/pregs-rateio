@@ -1,5 +1,6 @@
 package br.dev.brunorsch.pregsrateio.common.erros
 
+import br.dev.brunorsch.pregsrateio.common.log
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.server.exceptions.ExceptionHandler
@@ -12,10 +13,10 @@ class JsonSerializationExceptionHandler : ExceptionHandler<SerdeException, HttpR
         request: HttpRequest<*>,
         exception: io.micronaut.serde.exceptions.SerdeException
     ): HttpResponse<ErroResponse> {
-        val response = ErroResponse(
-            codigo = "SERIALIZATION_ERROR",
-            mensagem = "Erro ao serializar a resposta"
-        )
+        log().error("Erro de serialização: [{}]", exception.message, exception)
+        
+        val response = ErroResponse.INESPERADO
+
         return HttpResponse.serverError(response)
     }
 }
