@@ -9,7 +9,7 @@ import io.micronaut.http.HttpStatus.NOT_FOUND
 import jakarta.inject.Singleton
 
 @Singleton
-class CadastroUsuarioService(
+class UsuarioCrudService(
     private val usuarioRepository: UsuarioRepository,
 ) {
     fun buscarPorAuthSub(authSub: String): Usuario {

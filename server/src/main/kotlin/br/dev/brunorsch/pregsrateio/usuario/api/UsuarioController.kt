@@ -2,7 +2,7 @@ package br.dev.brunorsch.pregsrateio.usuario.api
 
 import br.dev.brunorsch.pregsrateio.usuario.api.dto.CadastroUsuarioRequest
 import br.dev.brunorsch.pregsrateio.usuario.api.dto.UsuarioProprioResponse
-import br.dev.brunorsch.pregsrateio.usuario.service.CadastroUsuarioService
+import br.dev.brunorsch.pregsrateio.usuario.service.UsuarioCrudService
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.HttpStatus.*
 import io.micronaut.http.annotation.*
@@ -11,6 +11,7 @@ import io.micronaut.security.authentication.Authentication
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.tags.Tag
+import jakarta.validation.Valid
 
 @Tag(
     name = "Usuários",
@@ -19,7 +20,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 @Secured("PGRT_USER")
 @Controller("/usuarios")
 open class UsuarioController(
-    private val cadastroUsuarioService: CadastroUsuarioService,
+    private val usuarioCrudService: UsuarioCrudService,
 ) {
     @Get("/completude")
     @Status(OK)
@@ -36,7 +37,7 @@ open class UsuarioController(
         auth: Authentication,
     ): HttpResponse<Unit> {
         val sub = auth.attributes["sub"] as String
-        val isCompleto = cadastroUsuarioService.validarCadastroCompleto(sub)
+        val isCompleto = usuarioCrudService.validarCadastroCompleto(sub)
 
         return HttpResponse.status(if(isCompleto) OK else PRECONDITION_FAILED)
     }
@@ -51,9 +52,9 @@ open class UsuarioController(
     @ApiResponse(responseCode = "201", description = "Usuário cadastrado com sucesso")
     open fun postUsuario(
         auth: Authentication,
-        @Body request: CadastroUsuarioRequest
+        @Body @Valid request: CadastroUsuarioRequest
     ): UsuarioProprioResponse =
-        cadastroUsuarioService.cadastrar(auth.attributes["sub"] as String, request)
+        usuarioCrudService.cadastrar(auth.attributes["sub"] as String, request)
             .let { UsuarioProprioResponse.from(it) }
 
     @Get("/me")
@@ -70,7 +71,7 @@ open class UsuarioController(
         auth: Authentication,
     ): UsuarioProprioResponse {
 
-        return cadastroUsuarioService.buscarPorAuthSub(auth.attributes["sub"] as String)
+        return usuarioCrudService.buscarPorAuthSub(auth.attributes["sub"] as String)
             .let { UsuarioProprioResponse.from(it) }
     }
 }
