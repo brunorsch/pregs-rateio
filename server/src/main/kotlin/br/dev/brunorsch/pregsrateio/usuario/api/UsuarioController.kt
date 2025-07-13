@@ -33,8 +33,9 @@ open class UsuarioController(
     @ApiResponse(responseCode = "200", description = "Cadastro regularizado")
     @ApiResponse(responseCode = "412", description = "Cadastro incompleto")
     open fun getCompletude(
-        @QueryValue sub: String
+        auth: Authentication,
     ): HttpResponse<Unit> {
+        val sub = auth.attributes["sub"] as String
         val isCompleto = cadastroUsuarioService.validarCadastroCompleto(sub)
 
         return HttpResponse.status(if(isCompleto) OK else PRECONDITION_FAILED)

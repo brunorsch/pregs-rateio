@@ -63,11 +63,6 @@ class CustomExceptionHandler {
     fun handleGenericError(request: HttpRequest<*>?, ex: Throwable): HttpResponse<ErroResponse> {
         log().error("Erro Inesperado: [{}]", ex.message, ex)
 
-        return HttpResponse.serverError(
-            ErroResponse(
-                codigo = "ERRO_INESPERADO",
-                mensagem = "Ocorreu um erro inesperado. Tente novamente mais tarde.",
-            )
-        )
+        return HttpResponse.serverError(ErroResponse.INESPERADO)
     }
 }

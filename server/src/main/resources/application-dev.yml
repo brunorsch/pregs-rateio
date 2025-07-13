@@ -13,6 +13,9 @@ micronaut:
       - pattern: /**
         access: isAuthenticated()
 
+mongodb:
+  uri: mongodb://root:development@localhost:27017/pregsrateio?authSource=admin
+
 #logger:
 #  levels:
 #    io.micronaut.security: DEBUG

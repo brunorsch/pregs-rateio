@@ -25,6 +25,3 @@ micronaut:
         claims-validators:
           audience:
             - "https://api.pregsrateio.app.br"
-
-mongodb:
-  uri: mongodb://root:development@localhost:27017/pregsrateio
