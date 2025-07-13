@@ -3,19 +3,11 @@ package br.dev.brunorsch.pregsrateio.usuario.api
 import br.dev.brunorsch.pregsrateio.usuario.api.dto.CadastroUsuarioRequest
 import br.dev.brunorsch.pregsrateio.usuario.api.dto.UsuarioProprioResponse
 import br.dev.brunorsch.pregsrateio.usuario.service.CadastroUsuarioService
-import io.micronaut.data.model.query.factory.Projections.id
 import io.micronaut.http.HttpResponse
-import io.micronaut.http.HttpResponseFactory
-import io.micronaut.http.HttpStatus
-import io.micronaut.http.HttpStatus.CREATED
-import io.micronaut.http.HttpStatus.OK
-import io.micronaut.http.HttpStatus.PRECONDITION_FAILED
-import io.micronaut.http.annotation.Body
-import io.micronaut.http.annotation.Controller
-import io.micronaut.http.annotation.Get
-import io.micronaut.http.annotation.Post
-import io.micronaut.http.annotation.QueryValue
-import io.micronaut.http.annotation.Status
+import io.micronaut.http.HttpStatus.*
+import io.micronaut.http.annotation.*
+import io.micronaut.security.annotation.Secured
+import io.micronaut.security.authentication.Authentication
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -24,6 +16,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
     name = "Usuários",
     description = "Gestão e cadastro dos usuários da aplicação (Organizadores)"
 )
+@Secured("PGRT_USER")
 @Controller("/usuarios")
 open class UsuarioController(
     private val cadastroUsuarioService: CadastroUsuarioService,
@@ -56,8 +49,27 @@ open class UsuarioController(
     )
     @ApiResponse(responseCode = "201", description = "Usuário cadastrado com sucesso")
     open fun postUsuario(
+        auth: Authentication,
         @Body request: CadastroUsuarioRequest
     ): UsuarioProprioResponse =
-        cadastroUsuarioService.cadastrar(request)
+        cadastroUsuarioService.cadastrar(auth.attributes["sub"] as String, request)
             .let { UsuarioProprioResponse.from(it) }
+
+    @Get("/me")
+    @Status(OK)
+    @Operation(
+        summary = "Buscar dados do usuário logado",
+        description = "Busca os dados do usuário logado na aplicação. " +
+                "O usuário precisa estar autenticado e o token JWT deve ser " +
+                "enviado no header Authorization."
+    )
+    @ApiResponse(responseCode = "200", description = "Dados do usuário encontrados")
+    @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+    open fun getUsuarioLogado(
+        auth: Authentication,
+    ): UsuarioProprioResponse {
+
+        return cadastroUsuarioService.buscarPorAuthSub(auth.attributes["sub"] as String)
+            .let { UsuarioProprioResponse.from(it) }
+    }
 }

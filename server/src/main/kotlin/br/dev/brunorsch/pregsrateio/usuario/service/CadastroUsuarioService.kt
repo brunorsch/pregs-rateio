@@ -5,22 +5,34 @@ import br.dev.brunorsch.pregsrateio.common.log
 import br.dev.brunorsch.pregsrateio.usuario.api.dto.CadastroUsuarioRequest
 import br.dev.brunorsch.pregsrateio.usuario.model.Usuario
 import br.dev.brunorsch.pregsrateio.usuario.model.UsuarioRepository
+import io.micronaut.http.HttpStatus.NOT_FOUND
 import jakarta.inject.Singleton
 
 @Singleton
 class CadastroUsuarioService(
     private val usuarioRepository: UsuarioRepository,
 ) {
+    fun buscarPorAuthSub(authSub: String): Usuario {
+        log().trace("Buscando usuário por Sub: [{}]", authSub)
+
+        return usuarioRepository.findByAuthSub(authSub)
+            ?: throw ControleFluxoException(
+                codigo ="USUARIO_NAO_ENCONTRADO",
+                mensagem = "Usuário não encontrado.",
+                status = NOT_FOUND
+            )
+    }
+
     fun validarCadastroCompleto(authSub: String): Boolean {
         val usuario = usuarioRepository.findByAuthSub(authSub)
 
         return usuario?.isCadastroCompleto ?: false
     }
 
-    fun cadastrar(request: CadastroUsuarioRequest): Usuario {
-        log().info("Cadastrando usuário: [${request.authSub}]")
+    fun cadastrar(authSub: String, request: CadastroUsuarioRequest): Usuario {
+        log().info("Cadastrando usuário: [${authSub}]")
 
-        if(validarCadastroCompleto(request.authSub)) {
+        if(validarCadastroCompleto(authSub)) {
             log().warn("Usuário com cadastro já finalizado.")
 
             throw ControleFluxoException(
@@ -28,6 +40,6 @@ class CadastroUsuarioService(
                 "Você já está cadastrado na plataforma.")
         }
 
-        return usuarioRepository.save(request.toUsuario())
+        return usuarioRepository.save(request.toUsuario(authSub))
     }
 }

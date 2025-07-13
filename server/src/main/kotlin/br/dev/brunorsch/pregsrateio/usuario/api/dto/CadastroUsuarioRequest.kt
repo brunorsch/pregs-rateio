@@ -5,14 +5,13 @@ import io.micronaut.serde.annotation.Serdeable
 
 @Serdeable
 data class CadastroUsuarioRequest(
-    val authSub: String,
     val nome: String,
     val sobrenome: String,
     val email: String,
     val whatsApp: String,
     val fotoUrl: String? = null,
 ) {
-    fun toUsuario() = Usuario(
+    fun toUsuario(authSub: String) = Usuario(
         authSub = authSub,
         nome = nome,
         sobrenome = sobrenome,
