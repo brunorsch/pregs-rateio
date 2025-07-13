@@ -15,10 +15,10 @@ class RecorrenciaCrudService(
     private val usuarioCrudService: UsuarioCrudService,
 ) {
     fun cadastrar(authSub: String, request: CriacaoRecorrenciaRequest): Recorrencia {
-        log().info("Criando recorrência para o usuário: [{}] - [{}]",
-            authSub, request)
-
         val usuario = usuarioCrudService.buscarPorAuthSub(authSub)
+
+        log().info("Criando recorrência para o usuário: [{}] - [{}]",
+            usuario.id, request)
 
         val recorrenciaNova = request.toRecorrencia(usuario.id!!)
 
