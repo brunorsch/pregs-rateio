@@ -1,7 +1,9 @@
 package br.dev.brunorsch.pregsrateio.usuario.api.dto
 
 import br.dev.brunorsch.pregsrateio.usuario.model.Usuario
+import io.micronaut.serde.annotation.Serdeable
 
+@Serdeable
 class UsuarioProprioResponse(
     val id: String,
     val authSub: String,

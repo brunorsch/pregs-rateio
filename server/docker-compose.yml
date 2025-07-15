@@ -14,6 +14,12 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: development
     volumes:
       - mongo_data:/data/db
+    networks:
+      - pregs_net
 
 volumes:
   mongo_data:
+
+networks:
+  pregs_net:
+    driver: bridge

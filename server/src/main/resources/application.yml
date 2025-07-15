@@ -6,21 +6,22 @@ micronaut:
       swagger:
         paths: classpath:META-INF/swagger
         mapping: /swagger/**
+      swagger-ui:
+        paths: classpath:META-INF/swagger/views/swagger-ui
+        mapping: /swagger-ui/**
       redoc:
         paths: classpath:META-INF/swagger/views/redoc
         mapping: /docs/**
   security:
     enabled: true
     token:
+      roles-name: https://api.pregsrateio.app.br/claims/roles
       jwt:
         enabled: true
         signatures:
           jwks:
             auth0:
-              url: "https://pregs.auth0.com/.well-known/jwks.json"
+              url: "https://pregs.us.auth0.com/.well-known/jwks.json"
         claims-validators:
           audience:
             - "https://api.pregsrateio.app.br"
-
-mongodb:
-  uri: mongodb://root:development@localhost:27017/pregsrateio

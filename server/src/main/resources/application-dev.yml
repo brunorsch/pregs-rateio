@@ -1,6 +1,5 @@
 micronaut:
   security:
-    enabled: true
     intercept-url-map:
       - pattern: /docs/**
         http-method: GET
@@ -8,3 +7,19 @@ micronaut:
       - pattern: /swagger/**
         http-method: GET
         access: isAnonymous()
+      - pattern: /swagger-ui/**
+        http-method: GET
+        access: isAnonymous()
+      - pattern: /**
+        access: isAuthenticated()
+
+mongodb:
+  uri: mongodb://root:development@localhost:27017/pregsrateio?authSource=admin
+
+#logger:
+#  levels:
+#    io.micronaut.security: DEBUG
+#    io.micronaut.http.filter: DEBUG
+#    io.micronaut.security.filters: DEBUG
+#    io.micronaut.security.token: DEBUG
+#    io.micronaut.security.token.jwt: DEBUG
