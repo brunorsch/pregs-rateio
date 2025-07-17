@@ -9,7 +9,7 @@ forma de validar outras possibilidades de ferramentas, padrões, arquitetura, et
 Pode-se usar o docker-compose.yml raiz do projeto para executar o servidor e o banco de dados locamente
 
 ```sh
-$ docker-compose up -d
+docker-compose up -d
 ```
 
 ## Detalhamento técnico
