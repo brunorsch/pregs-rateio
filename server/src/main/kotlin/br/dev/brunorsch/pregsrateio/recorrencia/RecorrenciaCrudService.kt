@@ -2,7 +2,6 @@ package br.dev.brunorsch.pregsrateio.recorrencia
 
 import br.dev.brunorsch.pregsrateio.common.log
 import br.dev.brunorsch.pregsrateio.recorrencia.api.dto.CriacaoRecorrenciaRequest
-import br.dev.brunorsch.pregsrateio.recorrencia.api.dto.RecorrenciaResponse
 import br.dev.brunorsch.pregsrateio.recorrencia.api.dto.toRecorrencia
 import br.dev.brunorsch.pregsrateio.recorrencia.model.Recorrencia
 import br.dev.brunorsch.pregsrateio.recorrencia.model.RecorrenciaRepository

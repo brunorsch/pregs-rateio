@@ -14,7 +14,7 @@ micronaut:
         access: isAuthenticated()
 
 mongodb:
-  uri: mongodb://root:development@localhost:27017/pregsrateio?authSource=admin
+  uri: ${MONGO_DEV_URL:mongodb://root:development@localhost:27017/pregsrateio?authSource=admin}
 
 #logger:
 #  levels:

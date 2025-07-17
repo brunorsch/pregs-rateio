@@ -1,9 +1,6 @@
-# Compose para execução do serviço localmente para desenvolvimento com IntelliJ
-# Para rodar o server standalone, usar o compose do front.
-
 version: '3.8'
 
-name: pregsrateio-server-dev
+name: pregs-rateio-local
 
 services:
   mongo:
@@ -17,6 +14,18 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: development
     volumes:
       - mongo_data:/data/db
+    networks:
+      - pregs_net
+
+  backend:
+    image: brunorsch/pregs-rateio-server:latest
+    depends_on:
+      - mongo
+    ports:
+      - "8080:8080"
+    environment:
+      MICRONAUT_ENVIRONMENTS: dev
+      MONGO_DEV_URL: mongodb://root:development@mongo:27017/pregsrateio?authSource=admin
     networks:
       - pregs_net
 

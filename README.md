@@ -5,6 +5,13 @@ O projeto não tem o objetivo de servir como um produto real, não temos uma exp
 como laboratório para teste de novas tecnologias, padrões de projeto diferentes do que estamos acostumados a usar no trabalho, e coisas do tipo. É uma
 forma de validar outras possibilidades de ferramentas, padrões, arquitetura, etc. Além de servir também como template de projeto para eventuais outros projetos nessas tecnologias.
 
+## Executando local
+Pode-se usar o docker-compose.yml raiz do projeto para executar o servidor e o banco de dados locamente
+
+```sh
+$ docker-compose up -d
+```
+
 ## Detalhamento técnico
 ### Decisões e motivações de tecnologia - Back-end:
 > 💡 O texto escrito aqui é de autoria do Bruno Schmidt (@brunorsch), e está em formato de texto pessoal de propósito.
