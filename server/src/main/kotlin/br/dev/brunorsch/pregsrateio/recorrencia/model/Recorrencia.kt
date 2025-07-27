@@ -27,4 +27,8 @@ class Recorrencia(
     val organizadorIsento: Boolean,
 
     val idsAmigos: List<ObjectId>,
-)
+) {
+    fun isUsuarioAutorizado(usuarioId: ObjectId): Boolean {
+        return idsAmigos.contains(usuarioId) || idDono == usuarioId
+    }
+}
