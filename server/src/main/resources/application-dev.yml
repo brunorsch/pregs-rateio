@@ -1,0 +1,15 @@
+spring:
+  application.name: pregs-rateio
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://pregs.us.auth0.com/
+          jwk-set-uri: https://pregs.us.auth0.com/.well-known/jwks.json
+
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /docs
+  api-docs:
+    enabled: true
