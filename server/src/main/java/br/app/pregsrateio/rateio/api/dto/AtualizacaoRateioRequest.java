@@ -1,13 +1,8 @@
 package br.app.pregsrateio.rateio.api.dto;
 
-import static br.app.pregsrateio.rateio.data.Rateio.Status.EM_ANDAMENTO;
-import static java.util.Objects.isNull;
-
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.bson.types.ObjectId;
 import org.hibernate.validator.constraints.Length;
 
 import br.app.pregsrateio.rateio.data.Rateio;
@@ -24,7 +19,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class CadastroRateioRequest {
+public class AtualizacaoRateioRequest {
     @NotBlank(message = "Nome é obrigatório")
     private final String nome;
 
@@ -45,31 +40,29 @@ public class CadastroRateioRequest {
     private final String chavePix;
 
     @Valid
-    private final List<@Valid ItemRequest> itens;
+    private final List<@Valid AtualizacaoItemRequest> itens;
 
-    public Rateio toDomain(ObjectId usuarioId) {
-        var rateio = Rateio.builder()
-            .usuarioId(usuarioId)
-            .nome(this.getNome())
-            .descricao(this.getDescricao())
-            .status(EM_ANDAMENTO)
-            .tipoRecorrecia(this.getTipoRecorrecia())
-            .valor(this.getValorTotal())
-            .diaPagamento(this.getDiaPagamento())
-            .chavePix(this.getChavePix())
-            .itens(isNull(this.getItens()) ? null : ItemRequest.mapItens(this.getItens()))
-            .build();
+    public void atualizarDominio(Rateio rateio) {
+        rateio.setNome(this.getNome());
+        rateio.setDescricao(this.getDescricao());
+        rateio.setTipoRecorrecia(this.getTipoRecorrecia());
+        rateio.setValor(this.getValorTotal());
+        rateio.setDiaPagamento(this.getDiaPagamento());
+        rateio.setChavePix(this.getChavePix());
 
-        rateio.calcularValorTotalItens();
-
-        return rateio;
+        if (this.itens != null) {
+            rateio.setItens(this.itens.stream()
+                .map(AtualizacaoItemRequest::toDomain)
+                .toList());
+        }
     }
-
 
     @Data
     @Builder
-    public static class ItemRequest {
-        @NotBlank(message = "Descrição do item é obrigatória")
+    public static class AtualizacaoItemRequest {
+        @NotNull(message = "Ao editar itens, é necessário informar o ID do item")
+        private Integer id;
+
         @Length(max = 40, message = "Tamanho máximo da descrição de itens é de 40 caracteres")
         private final String descricao;
 
@@ -79,25 +72,13 @@ public class CadastroRateioRequest {
         @DecimalMin(value = "0.01", message = "Valor do item deve ser maior que R$0,00")
         private final BigDecimal valor;
 
-        public Item toRequest(Integer id) {
+        public Item toDomain() {
             return Item.builder()
                 .id(id)
-                .descricao(this.getDescricao())
-                .quantidade(this.getQuantidade())
-                .valor(this.getValor())
+                .descricao(descricao)
+                .quantidade(quantidade)
+                .valor(valor)
                 .build();
-        }
-
-        private static List<Rateio.Item> mapItens(List<CadastroRateioRequest.ItemRequest> lista) {
-            var result = new ArrayList<Item>();
-
-            for (int i = 0; i < lista.size(); i++) {
-                var itemRequest = lista.get(i);
-                var item = itemRequest.toRequest(i + 1);
-                result.add(item);
-            }
-
-            return result;
         }
     }
 }

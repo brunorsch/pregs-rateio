@@ -1,8 +1,10 @@
 package br.app.pregsrateio.common.auditoria;
 
+import static java.util.Objects.nonNull;
 import static lombok.AccessLevel.PRIVATE;
 
 import java.time.OffsetDateTime;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,6 +41,10 @@ public class Historico {
 
     @Setter(PRIVATE)
     private Set<EventoAuditoria> eventos = null;
+
+    public Set<EventoAuditoria> getEventos() {
+        return (nonNull(eventos) ? Collections.unmodifiableSet(eventos) : new HashSet<>());
+    }
 
     public void pushEvento(EventoAuditoria evento) {
         if(eventos == null) {

@@ -39,6 +39,7 @@ public class RateioProprioResponse {
     @Data
     @Builder
     public static class ItemResponse {
+        private final Integer id;
         private final String descricao;
         private final Integer quantidade;
         private final BigDecimal valor;
