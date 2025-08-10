@@ -1,5 +1,6 @@
 package br.app.pregsrateio.common.auditoria;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,7 +8,7 @@ import java.util.Map;
 public record EventoAuditoria(
     String tipo,
     String descricao,
-    OffsetDateTime data,
+    LocalDateTime data,
     String usuario,
     Map<String, Object> detalhes
 ) {
@@ -20,6 +21,6 @@ public record EventoAuditoria(
     }
 
     public EventoAuditoria(String tipo, String descricao, String usuario, Map<String, Object> detalhes) {
-        this(tipo, descricao, OffsetDateTime.now(), usuario, new HashMap<>(detalhes));
+        this(tipo, descricao, LocalDateTime.now(), usuario, new HashMap<>(detalhes));
     }
 }

@@ -6,11 +6,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import br.app.pregsrateio.common.security.UsuarioPrincipal;
+import br.app.pregsrateio.common.security.UsuarioLogado;
 
 /**
  * Aspecto para adicionar o ID do usuário no MDC nos endpoints
- * que possuirem o {@link UsuarioPrincipal} nos parâmetros.
+ * que possuirem o {@link UsuarioLogado} nos parâmetros.
  */
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

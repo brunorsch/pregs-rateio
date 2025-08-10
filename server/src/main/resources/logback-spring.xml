@@ -1,6 +1,5 @@
 <configuration>
     <springProfile name="local">
-        <!-- tua config linda e colorida aqui -->
         <include resource="logback-local.xml"/>
     </springProfile>
 </configuration>

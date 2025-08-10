@@ -11,11 +11,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserPrincipalCacheRepository {
     private final CrudUsuarioService crudUsuarioService;
+    private final CustomAuthorityConverter customAuthorityConverter;
 
     @Cacheable(cacheNames = "principals", key = "#tokenHash")
-    public UsuarioPrincipal carregar(String tokenHash, Jwt jwt) {
+    public UsuarioLogado carregar(String tokenHash, Jwt jwt) {
         var usuario = crudUsuarioService.buscarPorAuthSub(jwt.getSubject());
+        var authorities = customAuthorityConverter.convert(jwt);
 
-        return UsuarioPrincipal.fromJwt(jwt, usuario);
+        return new UsuarioLogado(jwt, usuario, authorities);
     }
 }

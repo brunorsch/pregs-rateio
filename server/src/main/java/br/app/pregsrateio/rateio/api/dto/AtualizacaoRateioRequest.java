@@ -22,7 +22,7 @@ public class AtualizacaoRateioRequest {
     @NotBlank(message = "Nome é obrigatório")
     private final String nome;
 
-    @Max(value = 100, message = "Tamanho máximo da descrição é de 100 caracteres")
+    @Length(max = 100, message = "Tamanho máximo da descrição é de 100 caracteres")
     private final String descricao;
 
     @NotNull(message = "Tipo de recorrência é obrigatório")

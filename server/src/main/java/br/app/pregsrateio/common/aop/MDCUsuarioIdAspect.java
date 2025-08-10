@@ -10,7 +10,7 @@ import org.slf4j.MDC;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Component;
 
-import br.app.pregsrateio.common.security.UsuarioPrincipal;
+import br.app.pregsrateio.common.security.UsuarioLogado;
 
 @Aspect
 @Component
@@ -19,7 +19,7 @@ public class MDCUsuarioIdAspect {
     public Object mdcUsuarioIdAspect(ProceedingJoinPoint joinPoint) throws Throwable {
         var aopUtils = new AopUtils(joinPoint);
         var principal = aopUtils.getValorParametroAnotadoCom(
-            AuthenticationPrincipal.class, UsuarioPrincipal.class);
+            AuthenticationPrincipal.class, UsuarioLogado.class);
 
         if (principal == null) {
             return joinPoint.proceed();

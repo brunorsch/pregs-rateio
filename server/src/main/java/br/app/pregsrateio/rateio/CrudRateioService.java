@@ -14,7 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.app.pregsrateio.common.erros.ControleFluxoException;
-import br.app.pregsrateio.common.security.UsuarioPrincipal;
+import br.app.pregsrateio.common.security.UsuarioLogado;
 import br.app.pregsrateio.rateio.api.dto.AtualizacaoRateioRequest;
 import br.app.pregsrateio.rateio.api.dto.CadastroRateioRequest;
 import br.app.pregsrateio.rateio.data.Rateio;
@@ -28,9 +28,9 @@ import lombok.extern.slf4j.Slf4j;
 public class CrudRateioService {
     private final RateioRepository rateioRepository;
 
-    public Rateio cadastrar(UsuarioPrincipal principal, CadastroRateioRequest request) {
+    public Rateio cadastrar(UsuarioLogado principal, CadastroRateioRequest request) {
         log.info("Cadastrando novo rateio: [{}] para usuário: [{}]",
-            request.getNome(), principal.getSuid());
+            request.getNome(), principal.getIdUsuario());
 
         validarCamposCriacao(request.getValorTotal(), request.getItens());
 

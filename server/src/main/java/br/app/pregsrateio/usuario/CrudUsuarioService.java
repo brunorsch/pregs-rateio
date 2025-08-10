@@ -19,7 +19,7 @@ public class CrudUsuarioService {
     private final UsuarioRepository usuarioRepository;
 
     public Usuario buscarPorAuthSub(String authSub) {
-        log.trace("Buscando usuário por Sub: [{}]", authSub);
+        log.debug("Buscando usuário por Sub: [{}]", authSub);
 
         return usuarioRepository.findByAuthSub(authSub)
                 .orElseThrow(() -> new ControleFluxoException(

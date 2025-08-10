@@ -3,6 +3,7 @@ package br.app.pregsrateio.common.auditoria;
 import static java.util.Objects.nonNull;
 import static lombok.AccessLevel.PRIVATE;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.Collections;
 import java.util.HashSet;
@@ -28,13 +29,13 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Historico {
     @CreatedDate
-    private OffsetDateTime dataCriacao;
+    private LocalDateTime dataCriacao;
 
     @CreatedBy
     private String usuarioCriacao;
 
     @LastModifiedDate
-    private OffsetDateTime dataUltimaAlteracao;
+    private LocalDateTime dataUltimaAlteracao;
 
     @LastModifiedBy
     private String usuarioUltimaAlteracao;

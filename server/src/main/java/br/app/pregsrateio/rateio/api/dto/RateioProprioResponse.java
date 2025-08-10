@@ -5,6 +5,8 @@ import static java.util.Optional.ofNullable;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.bson.types.ObjectId;
+
 import br.app.pregsrateio.common.auditoria.HistoricoResponse;
 import br.app.pregsrateio.rateio.data.Rateio;
 import br.app.pregsrateio.rateio.data.Rateio.TipoRecorrencia;
@@ -14,6 +16,7 @@ import lombok.Data;
 @Data
 @Builder
 public class RateioProprioResponse {
+    private final String id;
     private final String nome;
     private final String descricao;
     private final TipoRecorrencia tipoRecorrencia;
@@ -25,6 +28,7 @@ public class RateioProprioResponse {
 
     public static RateioProprioResponse fromDomain(Rateio rateio) {
         return RateioProprioResponse.builder()
+            .id(rateio.getId().toHexString())
             .nome(rateio.getNome())
             .descricao(rateio.getDescricao())
             .tipoRecorrencia(rateio.getTipoRecorrencia())

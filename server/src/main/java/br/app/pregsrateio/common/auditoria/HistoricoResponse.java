@@ -3,10 +3,13 @@ package br.app.pregsrateio.common.auditoria;
 import static java.util.Objects.requireNonNullElse;
 import static java.util.stream.Collectors.toSet;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import org.springframework.cglib.core.Local;
 
 import lombok.Builder;
 import lombok.Data;
@@ -14,9 +17,9 @@ import lombok.Data;
 @Data
 @Builder
 public class HistoricoResponse {
-    private OffsetDateTime dataCriacao;
+    private LocalDateTime dataCriacao;
     private String usuarioCriacao;
-    private OffsetDateTime dataUltimaAlteracao;
+    private LocalDateTime dataUltimaAlteracao;
     private String usuarioUltimaAlteracao;
     @Builder.Default
     private Set<EventoAuditoriaResponse> eventos = null;
@@ -40,7 +43,7 @@ public class HistoricoResponse {
     public record EventoAuditoriaResponse(
         String tipo,
         String descricao,
-        OffsetDateTime data,
+        LocalDateTime data,
         String usuario,
         Map<String, Object> detalhes
     ) {

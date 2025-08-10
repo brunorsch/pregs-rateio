@@ -1,27 +1,15 @@
 <configuration>
-    <!-- Cores pro console -->
     <conversionRule conversionWord="clr" class="org.springframework.boot.logging.logback.ColorConverter" />
     <conversionRule conversionWord="wex" class="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
     <conversionRule conversionWord="wEx" class="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
-
-    <!-- Appender de console -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <!--
-                %clr{texto}{cor}  → cores ANSI
-                %d{HH:mm:ss.SSS}  → hora
-                %-5level          → nível com padding
-                [%thread]         → thread
-                %logger{36}       → logger truncado pra 36 chars
-                %msg               → mensagem
-            -->
             <pattern>
                 %clr(%d{HH:mm:ss.SSS}){faint} %clr(%-5level) %clr([%thread]){magenta} %clr(%logger{36}){cyan} %clr(:){faint} %msg%n%wEx
             </pattern>
         </encoder>
     </appender>
 
-    <!-- Root logger -->
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
     </root>
