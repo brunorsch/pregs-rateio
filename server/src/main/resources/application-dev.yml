@@ -13,3 +13,7 @@ springdoc:
     path: /docs
   api-docs:
     enabled: true
+
+logging:
+  level:
+    br.app.pregs.rateio: DEBUG

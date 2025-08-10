@@ -13,3 +13,6 @@ springdoc:
   api-docs:
     enabled: false
 
+logging:
+  level:
+    org.mongodb: WARN

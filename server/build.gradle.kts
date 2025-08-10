@@ -26,16 +26,23 @@ repositories {
 
 object Versions {
 	const val springdoc = "2.8.9"
+	const val commonsCodec = "1.19.0"
 }
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("org.springframework.boot:spring-boot-starter-aop")
+	implementation("org.springframework.boot:spring-boot-starter-cache")
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
+	implementation("org.springframework.security:spring-security-oauth2-jose")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("io.micrometer:micrometer-tracing-bridge-brave")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${Versions.springdoc}")
+	implementation("com.github.ben-manes.caffeine:caffeine")
+	implementation("commons-codec:commons-codec:${Versions.commonsCodec}")
 
 	compileOnly("org.projectlombok:lombok")
 

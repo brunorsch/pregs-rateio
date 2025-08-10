@@ -3,6 +3,7 @@ package br.app.pregsrateio.usuario.api;
 import br.app.pregsrateio.usuario.CrudUsuarioService;
 import br.app.pregsrateio.usuario.api.dto.CadastroUsuarioRequest;
 import br.app.pregsrateio.usuario.api.dto.UsuarioProprioResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,7 @@ import static org.springframework.http.HttpStatus.*;
 @Tag(name = "Usuários", description = "Gestão e cadastro dos usuários da aplicação (Organizadores)")
 @Validated
 @RequiredArgsConstructor
+@SecurityRequirement(name = "jwt")
 public class UsuarioController {
     private final CrudUsuarioService usuarioCrudService;
 
