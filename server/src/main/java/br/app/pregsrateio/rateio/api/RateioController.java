@@ -1,8 +1,10 @@
 package br.app.pregsrateio.rateio.api;
 
+import static org.springframework.data.domain.Sort.Direction.DESC;
 import static org.springframework.http.HttpStatus.CREATED;
 
 import org.bson.types.ObjectId;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -65,7 +67,7 @@ public class RateioController {
     @ApiResponse(responseCode = "200", description = "Rateios listados com sucesso")
     public Page<RateioProprioResponse> getRateios(
         @AuthenticationPrincipal UsuarioPrincipal principal,
-        @PageableDefault(sort = "historico.dataCriacao") Pageable pageable) {
+        @PageableDefault(sort = "historico.dataCriacao", direction = DESC) @ParameterObject Pageable pageable) {
 
         var page = crudRateioService.listarPorUsuario(
             principal.getUsuario().getId(), pageable);
