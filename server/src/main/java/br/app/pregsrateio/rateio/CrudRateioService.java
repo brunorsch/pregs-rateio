@@ -41,7 +41,7 @@ public class CrudRateioService {
         log.info("Rateio cadastrado com sucesso: [{}] com ID: [{}]",
             rateioCriado.getNome(), rateioCriado.getId());
 
-        return novoRateio;
+        return rateioCriado;
     }
 
     private void validarCamposCriacao(BigDecimal valorTotal, List<?> itens) {

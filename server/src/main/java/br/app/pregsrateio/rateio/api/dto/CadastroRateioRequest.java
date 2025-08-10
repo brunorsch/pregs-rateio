@@ -12,7 +12,6 @@ import org.hibernate.validator.constraints.Length;
 
 import br.app.pregsrateio.rateio.data.Rateio;
 import br.app.pregsrateio.rateio.data.Rateio.Item;
-import br.app.pregsrateio.rateio.data.Rateio.TipoRecorrecia;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Max;
@@ -32,7 +31,7 @@ public class CadastroRateioRequest {
     private final String descricao;
 
     @NotNull(message = "Tipo de recorrência é obrigatório")
-    private final TipoRecorrecia tipoRecorrecia;
+    private final Rateio.TipoRecorrencia tipoRecorrencia;
 
     @DecimalMin(value = "0.01", message = "Valor total deve ser maior que R$0,00")
     private final BigDecimal valorTotal;
@@ -53,7 +52,7 @@ public class CadastroRateioRequest {
             .nome(this.getNome())
             .descricao(this.getDescricao())
             .status(EM_ANDAMENTO)
-            .tipoRecorrecia(this.getTipoRecorrecia())
+            .tipoRecorrencia(this.getTipoRecorrencia())
             .valor(this.getValorTotal())
             .diaPagamento(this.getDiaPagamento())
             .chavePix(this.getChavePix())

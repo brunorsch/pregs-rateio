@@ -1,11 +1,13 @@
 package br.app.pregsrateio.rateio.api.dto;
 
+import static java.util.Optional.ofNullable;
+
 import java.math.BigDecimal;
 import java.util.List;
 
 import br.app.pregsrateio.common.auditoria.HistoricoResponse;
 import br.app.pregsrateio.rateio.data.Rateio;
-import br.app.pregsrateio.rateio.data.Rateio.TipoRecorrecia;
+import br.app.pregsrateio.rateio.data.Rateio.TipoRecorrencia;
 import lombok.Builder;
 import lombok.Data;
 
@@ -14,7 +16,7 @@ import lombok.Data;
 public class RateioProprioResponse {
     private final String nome;
     private final String descricao;
-    private final TipoRecorrecia tipoRecorrecia;
+    private final TipoRecorrencia tipoRecorrencia;
     private final BigDecimal valorTotal;
     private final Integer diaPagamento;
     private final String chavePix;
@@ -25,13 +27,15 @@ public class RateioProprioResponse {
         return RateioProprioResponse.builder()
             .nome(rateio.getNome())
             .descricao(rateio.getDescricao())
-            .tipoRecorrecia(rateio.getTipoRecorrecia())
+            .tipoRecorrencia(rateio.getTipoRecorrencia())
             .valorTotal(rateio.getValor())
             .diaPagamento(rateio.getDiaPagamento())
             .chavePix(rateio.getChavePix())
-            .itens(rateio.getItens().stream()
-                .map(ItemResponse::fromDomain)
-                .toList())
+            .itens(ofNullable(rateio.getItens())
+                .map(itens -> itens.stream()
+                    .map(ItemResponse::fromDomain)
+                    .toList())
+                .orElse(null))
             .historico(HistoricoResponse.fromDomain(rateio.getHistorico()))
             .build();
     }
@@ -46,6 +50,7 @@ public class RateioProprioResponse {
 
         public static ItemResponse fromDomain(Rateio.Item item) {
             return ItemResponse.builder()
+                .id(item.getId())
                 .descricao(item.getDescricao())
                 .quantidade(item.getQuantidade())
                 .valor(item.getValor())

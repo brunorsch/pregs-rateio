@@ -34,7 +34,7 @@ public class Rateio {
 
     private Status status;
 
-    private TipoRecorrecia tipoRecorrecia;
+    private TipoRecorrencia tipoRecorrencia;
 
     private List<Item> itens;
 
@@ -74,7 +74,7 @@ public class Rateio {
         CANCELADO
     }
 
-    public enum TipoRecorrecia {
+    public enum TipoRecorrencia {
         UNICO,
         MENSAL
     }
