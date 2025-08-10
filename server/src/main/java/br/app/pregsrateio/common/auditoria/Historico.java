@@ -38,13 +38,13 @@ public class Historico {
     private String usuarioUltimaAlteracao;
 
     @Setter(PRIVATE)
-    private Set<EventoAuditoria> historico = null;
+    private Set<EventoAuditoria> eventos = null;
 
-    public void pushHistorico(EventoAuditoria evento) {
-        if(historico == null) {
-            setHistorico(new HashSet<>());
+    public void pushEvento(EventoAuditoria evento) {
+        if(eventos == null) {
+            setEventos(new HashSet<>());
         }
 
-        historico.add(evento);
+        eventos.add(evento);
     }
 }

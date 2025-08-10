@@ -30,12 +30,16 @@ object Versions {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("org.springframework.boot:spring-boot-starter-aop")
+	implementation("org.springframework.boot:spring-boot-starter-cache")
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("io.micrometer:micrometer-tracing-bridge-brave")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${Versions.springdoc}")
+	implementation("com.github.ben-manes.caffeine:caffeine")
 
 	compileOnly("org.projectlombok:lombok")
 
