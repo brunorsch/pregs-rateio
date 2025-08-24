@@ -15,7 +15,7 @@ public class CadastroUsuarioRequest {
     private String nome;
     private String sobrenome;
     private String email;
-    private String whatsApp;
+    private String numeroCelular;
     private String fotoUrl;
 
     public Usuario toUsuario(String authSub) {
@@ -24,7 +24,7 @@ public class CadastroUsuarioRequest {
                 .nome(nome)
                 .sobrenome(sobrenome)
                 .email(email)
-                .whatsApp(whatsApp)
+                .numeroCelular(numeroCelular)
                 .fotoUrl(fotoUrl)
                 .build();
     }
