@@ -19,44 +19,42 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
-import lombok.Data;
 
-@Data
 @Builder
-public class CadastroRateioRequest {
+public record CadastroRateioRequest(
     @NotBlank(message = "Nome é obrigatório")
-    private final String nome;
+    String nome,
 
     @Length(max = 100, message = "Tamanho máximo da descrição é de 100 caracteres")
-    private final String descricao;
+    String descricao,
 
     @NotNull(message = "Tipo de recorrência é obrigatório")
-    private final Rateio.TipoRecorrencia tipoRecorrencia;
+    Rateio.TipoRecorrencia tipoRecorrencia,
 
     @DecimalMin(value = "0.01", message = "Valor total deve ser maior que R$0,00")
-    private final BigDecimal valorTotal;
+    BigDecimal valorTotal,
 
     @Min(value = 1, message = "Valor mínimo deve ser maior que 0")
     @Max(value = 31, message = "Dia de pagamento deve ser entre 1 e 31")
-    private final Integer diaPagamento;
+    Integer diaPagamento,
 
     @NotBlank(message = "Chave Pix é obrigatória")
-    private final String chavePix;
+    String chavePix,
 
     @Valid
-    private final List<@Valid ItemRequest> itens;
-
+    List<@Valid ItemRequest> itens
+) {
     public Rateio toDomain(ObjectId usuarioId) {
         var rateio = Rateio.builder()
             .usuarioId(usuarioId)
-            .nome(this.getNome())
-            .descricao(this.getDescricao())
+            .nome(this.nome())
+            .descricao(this.descricao())
             .status(EM_ANDAMENTO)
-            .tipoRecorrencia(this.getTipoRecorrencia())
-            .valor(this.getValorTotal())
-            .diaPagamento(this.getDiaPagamento())
-            .chavePix(this.getChavePix())
-            .itens(isNull(this.getItens()) ? null : ItemRequest.mapItens(this.getItens()))
+            .tipoRecorrencia(this.tipoRecorrencia())
+            .valor(this.valorTotal())
+            .diaPagamento(this.diaPagamento())
+            .chavePix(this.chavePix())
+            .itens(isNull(this.itens()) ? null : ItemRequest.mapItens(this.itens()))
             .build();
 
         rateio.calcularValorTotalItens();
@@ -65,29 +63,28 @@ public class CadastroRateioRequest {
     }
 
 
-    @Data
     @Builder
-    public static class ItemRequest {
+    public record ItemRequest(
         @NotBlank(message = "Descrição do item é obrigatória")
         @Length(max = 40, message = "Tamanho máximo da descrição de itens é de 40 caracteres")
-        private final String descricao;
+        String descricao,
 
         @Min(value = 1, message = "Quantidade deve ser pelo menos 1")
-        private final Integer quantidade;
+        Integer quantidade,
 
         @DecimalMin(value = "0.01", message = "Valor do item deve ser maior que R$0,00")
-        private final BigDecimal valor;
-
+        BigDecimal valor
+    ) {
         public Item toRequest(Integer id) {
             return Item.builder()
                 .id(id)
-                .descricao(this.getDescricao())
-                .quantidade(this.getQuantidade())
-                .valor(this.getValor())
+                .descricao(this.descricao())
+                .quantidade(this.quantidade())
+                .valor(this.valor())
                 .build();
         }
 
-        private static List<Rateio.Item> mapItens(List<CadastroRateioRequest.ItemRequest> lista) {
+        private static List<Item> mapItens(List<ItemRequest> lista) {
             var result = new ArrayList<Item>();
 
             for (int i = 0; i < lista.size(); i++) {

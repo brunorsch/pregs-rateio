@@ -24,7 +24,7 @@ public class Usuario {
 
     private String email;
 
-    private String whatsApp;
+    private String numeroCelular;
 
     private String fotoUrl;
 

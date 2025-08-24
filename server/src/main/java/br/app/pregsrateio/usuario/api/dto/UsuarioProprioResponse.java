@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 
 import static java.util.Objects.requireNonNull;
-import static java.util.Objects.requireNonNullElse;
 import static java.util.Optional.ofNullable;
 
 @Data
@@ -21,7 +20,7 @@ public class UsuarioProprioResponse {
     private String nome;
     private String sobrenome;
     private String email;
-    private String whatsApp;
+    private String numeroCelular;
     private String fotoUrl;
 
     public static UsuarioProprioResponse from(Usuario usuario) {
@@ -31,7 +30,7 @@ public class UsuarioProprioResponse {
                 .nome(usuario.getNome())
                 .sobrenome(usuario.getSobrenome())
                 .email(usuario.getEmail())
-                .whatsApp(usuario.getWhatsApp())
+                .numeroCelular(usuario.getNumeroCelular())
                 .fotoUrl(usuario.getFotoUrl())
                 .build();
     }
