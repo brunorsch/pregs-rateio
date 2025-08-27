@@ -20,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 public class CrudAmigoService {
+    private final AmigoMapper amigoMapper;
     private final AmigoRepository amigoRepository;
 
     public Amigo cadastrarParaUsuario(UsuarioLogado usuario, CadastroAmigoRequest request) {
