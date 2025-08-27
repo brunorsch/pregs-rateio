@@ -28,10 +28,11 @@ public class CrudAmigoService {
         log.info("Cadastrando novo amigo: [{}]", request);
 
         var novoAmigo = amigoMapper.fromCadastroRequest(request, usuario);
+        var amigoSalvo = amigoRepository.save(novoAmigo);
 
-        log.info("Amigo cadastrado com sucesso: [{}]", novoAmigo.getId());
+        log.info("Amigo cadastrado com sucesso: [{}]", amigoSalvo.getId());
 
-        return amigoRepository.save(novoAmigo);
+        return amigoSalvo;
     }
 
     public Page<Amigo> listarPorUsuario(UsuarioLogado usuario, Pageable pageable) {
@@ -60,5 +61,15 @@ public class CrudAmigoService {
         log.info("Amigo atualizado com sucesso: [{}]", amigoExistente.getId());
 
         return amigoRepository.save(amigoExistente);
+    }
+
+    public void excluirParaUsuario(UsuarioLogado usuario, ObjectId amigoId) {
+        var usuarioId = usuario.getIdUsuario();
+        log.info("Excluindo amigo: [{}] do usuário: [{}]", amigoId, usuarioId);
+
+        var amigoExistente = buscarPorIdParaUsuario(usuario, amigoId);
+        amigoRepository.delete(amigoExistente);
+
+        log.info("Amigo excluído com sucesso: [{}]", amigoId);
     }
 }

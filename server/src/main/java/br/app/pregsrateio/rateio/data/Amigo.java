@@ -9,9 +9,11 @@ import br.app.pregsrateio.common.auditoria.Historico;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "amigos")
 public class Amigo {

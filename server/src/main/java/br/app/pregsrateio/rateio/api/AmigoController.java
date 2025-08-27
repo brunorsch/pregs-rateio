@@ -2,6 +2,7 @@ package br.app.pregsrateio.rateio.api;
 
 import static org.springframework.data.domain.Sort.Direction.DESC;
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 import org.bson.types.ObjectId;
 import org.springdoc.core.annotations.ParameterObject;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,9 +27,7 @@ import br.app.pregsrateio.common.validation.MongoIdValido;
 import br.app.pregsrateio.rateio.CrudAmigoService;
 import br.app.pregsrateio.rateio.api.dto.AmigoProprioResponse;
 import br.app.pregsrateio.rateio.api.dto.AtualizacaoAmigoRequest;
-import br.app.pregsrateio.rateio.api.dto.AtualizacaoRateioRequest;
 import br.app.pregsrateio.rateio.api.dto.CadastroAmigoRequest;
-import br.app.pregsrateio.rateio.api.dto.RateioProprioResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -53,7 +53,7 @@ public class AmigoController {
         summary = "Cadastrar amigo",
         description = "Cadastra um amigo no sistema."
     )
-    @ApiResponse(responseCode = "201", description = "Rateio criado com sucesso")
+    @ApiResponse(responseCode = "201", description = "Amigo criado com sucesso")
     public AmigoProprioResponse postAmigo(
         @Valid @RequestBody CadastroAmigoRequest request,
         UsuarioLogado principal) {
@@ -72,7 +72,6 @@ public class AmigoController {
     public Page<AmigoProprioResponse> getAmigos(
         @PageableDefault(sort = "historico.dataCriacao", direction = DESC) @ParameterObject Pageable pageable,
         UsuarioLogado user) {
-        System.out.println(user.getPrincipal());
         var page = crudAmigoService.listarPorUsuario(user, pageable);
 
         return page.map(AmigoProprioResponse::fromDomain);
@@ -110,5 +109,19 @@ public class AmigoController {
             user, request);
 
         return AmigoProprioResponse.fromDomain(amigoAtualizado);
+    }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('PGRT_USER')")
+    @ResponseStatus(NO_CONTENT)
+    @Operation(
+        summary = "Excluir um amigo próprio",
+        description = "Exclui um amigo específico criado pelo usuário autenticado."
+    )
+    @ApiResponse(responseCode = "204", description = "Amigo excluído com sucesso")
+    @ApiResponse(responseCode = "404", description = "Amigo não encontrado")
+    public void deleteAmigo(
+        @MongoIdValido @PathVariable("id") String amigoId, UsuarioLogado user) {
+        crudAmigoService.excluirParaUsuario(user, new ObjectId(amigoId));
     }
 }
