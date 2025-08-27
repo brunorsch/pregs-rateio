@@ -103,12 +103,12 @@ public class AmigoController {
     )
     @ApiResponse(responseCode = "200", description = "Amigo atualizado com sucesso")
     @ApiResponse(responseCode = "404", description = "Amigo não encontrado")
-    public RateioProprioResponse putAmigo(
+    public AmigoProprioResponse putAmigo(
         @Valid @RequestBody AtualizacaoAmigoRequest request,
         UsuarioLogado user) {
-        var rateioAtualizado = crudAmigoService.atualizarParaUsuario(
+        var amigoAtualizado = crudAmigoService.atualizarParaUsuario(
             user, request);
 
-        return RateioProprioResponse.fromDomain(rateioAtualizado);
+        return AmigoProprioResponse.fromDomain(amigoAtualizado);
     }
 }

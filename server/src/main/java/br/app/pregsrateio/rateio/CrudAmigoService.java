@@ -13,6 +13,7 @@ import br.app.pregsrateio.rateio.api.dto.AtualizacaoAmigoRequest;
 import br.app.pregsrateio.rateio.api.dto.CadastroAmigoRequest;
 import br.app.pregsrateio.rateio.data.Amigo;
 import br.app.pregsrateio.rateio.data.AmigoRepository;
+import br.app.pregsrateio.rateio.mapper.AmigoMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,11 +27,11 @@ public class CrudAmigoService {
     public Amigo cadastrarParaUsuario(UsuarioLogado usuario, CadastroAmigoRequest request) {
         log.info("Cadastrando novo amigo: [{}]", request);
 
-        Amigo amigo = Amigo.builder().build();
+        var novoAmigo = amigoMapper.fromCadastroRequest(request, usuario);
 
-        log.info("Amigo cadastrado com sucesso: [{}]", amigo.getId());
+        log.info("Amigo cadastrado com sucesso: [{}]", novoAmigo.getId());
 
-        return amigoRepository.save(amigo);
+        return amigoRepository.save(novoAmigo);
     }
 
     public Page<Amigo> listarPorUsuario(UsuarioLogado usuario, Pageable pageable) {
@@ -54,7 +55,7 @@ public class CrudAmigoService {
 
         var amigoExistente = buscarPorIdParaUsuario(usuario, amigoId);
 
-        
+        amigoMapper.updateFromRequest(amigoExistente, request);
 
         log.info("Amigo atualizado com sucesso: [{}]", amigoExistente.getId());
 
