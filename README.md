@@ -15,11 +15,7 @@ docker-compose up -d
 ## Detalhamento técnico
 ### Decisões e motivações de tecnologia - Back-end:
 > 💡 O texto escrito aqui é de autoria do Bruno Schmidt (@brunorsch), e está em formato de texto pessoal de propósito.
-- **Kotlin**: Apenas porque já estou bem acostumado com Java no trabalho, e não sinto que tenha nada de novo de explorar que eu não consiga explorar no trabalho; Kotlin é um ótimo *syntatic sugar*
- do Java e é bastante divertido e prazeroso desenvolver back-end com ele. Além da sintaxe mais concisa, os recuros de null-safety são ótimos para se trabalhar no back-end.
-- **Micronaut**: Testar uma alternativa ao Spring que parece bastante promissora. Também para servir de template para projetos futuros. A forma
-como o Micronaut utiliza a geração de código para reduzir o uso de recursos e permitir um startup time menor são vantagens bem interessantes que merecem
-ser validados num projeto real. *(⚠️ Sofri bastante com as documentações do `micronaut-security`, são bem menos abragentes que as docs do Spring)*
+- **Java/Spring**: A ideia era possibilitar ao @RafaelSantini23 a se familiarizar com a stack do Java, por isso optamos por construir o projeto em Java/Spring Boot.
 - **MongoDB**: Porque Mongo lida bem com o nível de carga que esse projeto vai ter, e também porque eu não queria perder tempo escrevendo migrations.
 - **Auth0**: Para testar na prática o nível de complexidade de se configurar e usar o Auth0 num projeto. *(⚠️ Achei a implementação bem confusa, 
 e fiquei bastante perdido em vários momentos, pode ser puramente por falta de prática e de conhecimento de segurança da minha parte, mas é interessante ter um ChatGPT por perto 
