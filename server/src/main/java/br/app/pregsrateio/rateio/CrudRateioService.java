@@ -30,9 +30,9 @@ public class CrudRateioService {
 
     public Rateio cadastrar(UsuarioLogado principal, CadastroRateioRequest request) {
         log.info("Cadastrando novo rateio: [{}] para usuário: [{}]",
-            request.getNome(), principal.getIdUsuario());
+            request.nome(), principal.getIdUsuario());
 
-        validarCamposCriacao(request.getValorTotal(), request.getItens());
+        validarCamposCriacao(request.valorTotal(), request.itens());
 
         var novoRateio = request.toDomain(principal.getUsuario().getId());
 

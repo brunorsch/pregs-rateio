@@ -27,6 +27,7 @@ repositories {
 object Versions {
 	const val springdoc = "2.8.9"
 	const val commonsCodec = "1.19.0"
+    const val mapstruct = "1.6.3"
 }
 
 dependencies {
@@ -44,9 +45,13 @@ dependencies {
 	implementation("com.github.ben-manes.caffeine:caffeine")
 	implementation("commons-codec:commons-codec:${Versions.commonsCodec}")
 
+    // Lombok
 	compileOnly("org.projectlombok:lombok")
-
 	annotationProcessor("org.projectlombok:lombok")
+
+    // MapStruct
+    implementation("org.mapstruct:mapstruct:${Versions.mapstruct}")
+    annotationProcessor("org.mapstruct:mapstruct-processor:${Versions.mapstruct}")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
@@ -57,4 +62,8 @@ dependencies {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+tasks.withType<JavaCompile> {
+    options.compilerArgs.add("-Amapstruct.defaultComponentModel=spring")
 }
