@@ -14,11 +14,10 @@ docker-compose up -d
 
 ## Detalhamento técnico
 ### Decisões e motivações de tecnologia - Back-end:
-> 💡 O texto escrito aqui é de autoria do Bruno Schmidt (@brunorsch), e está em formato de texto pessoal de propósito.
-- **Java/Spring**: A ideia era possibilitar ao @RafaelSantini23 a se familiarizar com a stack do Java, por isso optamos por construir o projeto em Java/Spring Boot.
+> 💡 O texto escrito aqui é de autoria do Bruno Schmidt ([@brunorsch](https://github.com/brunorsch)), e está em formato de texto pessoal de propósito.
+- **Java/Spring**: A ideia era possibilitar ao [@RafaelSantini23](https://github.com/RafaelSantini23) a se familiarizar com a stack do Java, por isso optamos por (re-)construir o projeto em Java/Spring Boot.
 - **MongoDB**: Porque Mongo lida bem com o nível de carga que esse projeto vai ter, e também porque eu não queria perder tempo escrevendo migrations.
 - **Auth0**: Para testar na prática o nível de complexidade de se configurar e usar o Auth0 num projeto. *(⚠️ Achei a implementação bem confusa, 
 e fiquei bastante perdido em vários momentos, pode ser puramente por falta de prática e de conhecimento de segurança da minha parte, mas é interessante ter um ChatGPT por perto 
 pra ajudar a lidar com essa integração)*
-- **Redoc e Swagger UI**: O redoc foi utilizado para leitura de documentação, que na minha visão tem uma UI muito melhor para isso, mas mantive o Swagger UI pra facilitar testes, uma vez que
-essa versão do Redoc que vem junto com o `micronaut-openapi` não tinha feature de "client" para realizar as requests diretamente. 
+- **MapStruct**: Mesma ideia da familiarização ao ecossistema do Java, além de explorar práticas avançadas da lib.
