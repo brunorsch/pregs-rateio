@@ -1,6 +1,6 @@
 version: '3.8'
 
-name: pregs-rateio-local
+name: pregs-rateio-dev
 
 services:
   mongo:
@@ -18,13 +18,13 @@ services:
       - pregs_net
 
   backend:
-    image: brunorsch/pregs-rateio-server:latest
+    image: brunorsch/pregs-rateio-server:1.0.0
     depends_on:
       - mongo
     ports:
       - "8080:8080"
     environment:
-      MICRONAUT_ENVIRONMENTS: dev
+      SPRING_PROFILES_ACTIVE: dev
       MONGO_DEV_URL: mongodb://root:development@mongo:27017/pregsrateio?authSource=admin
     networks:
       - pregs_net
