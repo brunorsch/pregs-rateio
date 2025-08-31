@@ -22,7 +22,7 @@ services:
     depends_on:
       - mongo
     ports:
-      - "8080:8080"
+      - "9001:9001"
     environment:
       SPRING_PROFILES_ACTIVE: dev
       MONGO_DEV_URL: mongodb://root:development@mongo:27017/pregsrateio?authSource=admin
