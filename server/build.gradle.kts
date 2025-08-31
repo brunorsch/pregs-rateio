@@ -1,3 +1,6 @@
+
+import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
+
 plugins {
 	java
 	id("org.springframework.boot") version "4.0.0-SNAPSHOT"
@@ -66,4 +69,20 @@ tasks.withType<Test> {
 
 tasks.withType<JavaCompile> {
     options.compilerArgs.add("-Amapstruct.defaultComponentModel=spring")
+}
+
+tasks.withType<BootBuildImage> {
+    imageName.set("registry.pregsrateio.app.br/pregs-rateio-server:${project.version}")
+}
+
+tasks.register<BootBuildImage>("bootBuildImageProd") {
+    group = "build"
+    description = "Buildar imagem Docker pra rodar no ambiente"
+
+    archiveFile.set(tasks.named<BootBuildImage>("bootBuildImage")
+        .flatMap { it.archiveFile })
+}
+
+tasks.named<BootBuildImage>("bootBuildImageProd") {
+    imagePlatform = "linux/amd64"
 }
