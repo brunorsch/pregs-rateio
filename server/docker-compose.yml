@@ -3,7 +3,7 @@
 
 version: '3.8'
 
-name: pregsrateio-server-dev
+name: pregsrateio-server-local
 
 services:
   mongo:
