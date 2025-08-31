@@ -31,6 +31,7 @@ object Versions {
 	const val springdoc = "2.8.9"
 	const val commonsCodec = "1.19.0"
     const val mapstruct = "1.6.3"
+    const val logstash = "7.4"
 }
 
 dependencies {
@@ -56,7 +57,10 @@ dependencies {
     implementation("org.mapstruct:mapstruct:${Versions.mapstruct}")
     annotationProcessor("org.mapstruct:mapstruct-processor:${Versions.mapstruct}")
 
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+    // Observabilidade
+    implementation("net.logstash.logback:logstash-logback-encoder:${Versions.logstash}")
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
