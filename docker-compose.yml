@@ -18,7 +18,7 @@ services:
       - pregs_net
 
   backend:
-    image: brunorsch/pregs-rateio-server:1.0.0
+    image: registry.pregsrateio.app.br/pregs-rateio-server:1.0.0
     depends_on:
       - mongo
     ports:
