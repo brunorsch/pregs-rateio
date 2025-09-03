@@ -21,3 +21,4 @@ docker-compose up -d
 e fiquei bastante perdido em vários momentos, pode ser puramente por falta de prática e de conhecimento de segurança da minha parte, mas é interessante ter um ChatGPT por perto 
 pra ajudar a lidar com essa integração)*
 - **MapStruct**: Mesma ideia da familiarização ao ecossistema do Java, além de explorar práticas avançadas da lib.
+- **AspectJ**: Expandir os conhecimentos a respeito de AOP e como usar aspectos de forma efetiva.
