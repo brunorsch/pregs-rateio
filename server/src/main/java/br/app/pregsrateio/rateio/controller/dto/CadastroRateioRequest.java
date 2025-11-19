@@ -62,6 +62,9 @@ public record CadastroRateioRequest(
         return rateio;
     }
 
+    public Rateio toDomain() {
+        return toDomain(null);
+    }
 
     @Builder
     public record ItemRequest(

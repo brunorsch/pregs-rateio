@@ -25,6 +25,7 @@ public class Rateio {
     private ObjectId id;
 
     @Indexed
+    @Nullable
     private ObjectId usuarioId;
 
     private String nome;

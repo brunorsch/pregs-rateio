@@ -19,6 +19,7 @@ import br.app.pregsrateio.rateio.controller.dto.AtualizacaoRateioRequest;
 import br.app.pregsrateio.rateio.controller.dto.CadastroRateioRequest;
 import br.app.pregsrateio.rateio.data.Rateio;
 import br.app.pregsrateio.rateio.data.RateioRepository;
+import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,18 +29,27 @@ import lombok.extern.slf4j.Slf4j;
 public class CrudRateioService {
     private final RateioRepository rateioRepository;
 
-    public Rateio cadastrar(UsuarioLogado principal, CadastroRateioRequest request) {
+    public Rateio cadastrarAnonimo(CadastroRateioRequest request) {
+        log.info("Cadastrando rateio com usuário anônimo: [{}]", request.nome());
+
+        return cadastrar(null, request);
+    }
+
+    public Rateio cadastrarParaUsuario(UsuarioLogado principal, CadastroRateioRequest request) {
         log.info("Cadastrando novo rateio: [{}] para usuário: [{}]",
             request.nome(), principal.getIdUsuario());
 
+        return cadastrar(principal.getIdUsuario(), request);
+    }
+
+    private Rateio cadastrar(@Nullable ObjectId usuarioId, CadastroRateioRequest request) {
         validarCamposCriacao(request.valorTotal(), request.itens());
 
-        var novoRateio = request.toDomain(principal.getUsuario().getId());
+        var novoRateio = request.toDomain(usuarioId);
 
         var rateioCriado = rateioRepository.save(novoRateio);
 
-        log.info("Rateio cadastrado com sucesso: [{}] com ID: [{}]",
-            rateioCriado.getNome(), rateioCriado.getId());
+        log.info("Rateio cadastrado com sucesso com ID: [{}]", rateioCriado.getId());
 
         return rateioCriado;
     }

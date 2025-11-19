@@ -3,6 +3,8 @@ package br.app.pregsrateio.rateio.controller;
 import static org.springframework.data.domain.Sort.Direction.DESC;
 import static org.springframework.http.HttpStatus.CREATED;
 
+import javax.annotation.Nullable;
+
 import org.bson.types.ObjectId;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
@@ -44,18 +46,20 @@ public class RateioController {
     private final CrudRateioService crudRateioService;
 
     @PostMapping
-    @PreAuthorize("hasRole('PGRT_USER')")
+    @PreAuthorize("permitAll()")
     @ResponseStatus(CREATED)
     @Operation(
         summary = "Cadastrar rateio",
-        description = "Cria um novo rateio."
+        description = "Cria um novo rateio. O serviço permite a criação de rateio autenticado ou anônimo."
     )
     @ApiResponse(responseCode = "201", description = "Rateio criado com sucesso")
     public RateioProprioResponse postRateio(
         @Valid @RequestBody CadastroRateioRequest request,
-        UsuarioLogado principal) {
+        @Nullable UsuarioLogado principal) {
 
-        var cadastrado = crudRateioService.cadastrar(principal, request);
+        var cadastrado = principal == null
+            ? crudRateioService.cadastrarAnonimo(request)
+            : crudRateioService.cadastrarParaUsuario(principal, request);
 
         return RateioProprioResponse.fromDomain(cadastrado);
     }
