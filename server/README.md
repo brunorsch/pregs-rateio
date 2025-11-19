@@ -42,6 +42,11 @@ Configurações (Pasta `src/main/resources/`):
 Testes:
 - `src/test/java` - testes da aplicação (ex.: `PregsrateioApplicationTests.java`).
 
+## Convenção de uso de recursos entre features
+Cada feature (ex.: `rateio`, `usuario`) deve ser auto-contida, ou seja, deve conter seus próprios controllers, 
+serviços, repositórios e entidades. A comunicação entre features deve ser feita via uma unica interface pública 
+(ex.: classe `RateioApi` que deve estar presente na raiz do pacote `rateio`).
+
 ## Perfis e variáveis de ambiente
 
 A aplicação usa perfis Spring definidos em `application-*.yml`. Para ativar um perfil localmente, exporte a 
