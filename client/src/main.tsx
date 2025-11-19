@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
 import {RouterProvider} from "react-router/dom";
@@ -12,3 +13,16 @@ createRoot(root!).render(
         <RouterProvider router={router}/>
     </StrictMode>
 );
+=======
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "bootswatch/dist/litera/bootstrap.min.css"; // Added this :boom:
+import "./index.css";
+import App from "./App.tsx";
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+);
+>>>>>>> Stashed changes
