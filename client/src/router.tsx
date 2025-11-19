@@ -1,16 +1,6 @@
 import { createBrowserRouter } from "react-router";
-import { HomePage, NotFound } from "./application";
-
-export const ROUTES: Routes = {
-  HOME: {
-    path: "/",
-    permissions: [], // add user group :)
-  },
-  NOT_FOUND: {
-    path: "*",
-    permissions: [],
-  },
-};
+import { HomePage, NotFound } from "./presentation/screen";
+import type { RouteObject } from "react-router";
 
 type SystemRoutes = "HOME" | "NOT_FOUND";
 
@@ -21,15 +11,32 @@ type Routes = {
 type Route = {
   path: string;
   permissions: string[];
+  component: React.ComponentType;
 };
 
-export const router = createBrowserRouter([
-  {
-    path: ROUTES.HOME.path,
-    Component: HomePage,
+export const ROUTES: Routes = {
+  HOME: {
+    path: "/",
+    permissions: [],
+    component: HomePage,
   },
-  {
-    path: ROUTES.NOT_FOUND.path,
-    Component: NotFound,
+  NOT_FOUND: {
+    path: "*",
+    permissions: [],
+    component: NotFound,
   },
-]);
+};
+
+export const router = createBrowserRouter(
+  Object.keys(ROUTES).map((key) => {
+    const indiceRota = key as keyof Routes;
+    const rota = ROUTES[indiceRota];
+
+    const routeObject: RouteObject = {
+      path: rota.path,
+      Component: rota.component,
+    };
+
+    return routeObject;
+  }),
+);
