@@ -1,3 +1,5 @@
 export default function NotFound() {
-    return <>Não Encontrou não paizão</>
+    return <section className="">
+        <main className="">404 Bruh?</main>
+    </section>
 }
