@@ -48,9 +48,6 @@ public class Rateio {
     private String emvQrCode;
 
     @Builder.Default
-    private List<ObjectId> amigosIds = new ArrayList<>();
-
-    @Builder.Default
     private Historico historico = new Historico();
 
     public void calcularValorTotalItens() {

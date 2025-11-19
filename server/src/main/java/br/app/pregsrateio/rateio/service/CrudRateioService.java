@@ -1,4 +1,4 @@
-package br.app.pregsrateio.rateio;
+package br.app.pregsrateio.rateio.service;
 
 import static java.util.Objects.isNull;
 import static java.util.Optional.ofNullable;
@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
 
 import br.app.pregsrateio.common.erros.ControleFluxoException;
 import br.app.pregsrateio.common.security.UsuarioLogado;
-import br.app.pregsrateio.rateio.api.dto.AtualizacaoRateioRequest;
-import br.app.pregsrateio.rateio.api.dto.CadastroRateioRequest;
+import br.app.pregsrateio.rateio.controller.dto.AtualizacaoRateioRequest;
+import br.app.pregsrateio.rateio.controller.dto.CadastroRateioRequest;
 import br.app.pregsrateio.rateio.data.Rateio;
 import br.app.pregsrateio.rateio.data.RateioRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,12 +1,12 @@
-package br.app.pregsrateio.usuario.api;
+package br.app.pregsrateio.usuario.controller;
 
-import br.app.pregsrateio.usuario.CrudUsuarioService;
-import br.app.pregsrateio.usuario.api.dto.CadastroUsuarioRequest;
-import br.app.pregsrateio.usuario.api.dto.UsuarioProprioResponse;
+import br.app.pregsrateio.usuario.service.CrudUsuarioService;
+import br.app.pregsrateio.usuario.controller.dto.CadastroUsuarioRequest;
+import br.app.pregsrateio.usuario.controller.dto.UsuarioProprioResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

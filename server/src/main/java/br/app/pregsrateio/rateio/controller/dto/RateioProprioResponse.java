@@ -1,11 +1,9 @@
-package br.app.pregsrateio.rateio.api.dto;
+package br.app.pregsrateio.rateio.controller.dto;
 
 import static java.util.Optional.ofNullable;
 
 import java.math.BigDecimal;
 import java.util.List;
-
-import org.bson.types.ObjectId;
 
 import br.app.pregsrateio.common.auditoria.HistoricoResponse;
 import br.app.pregsrateio.rateio.data.Rateio;

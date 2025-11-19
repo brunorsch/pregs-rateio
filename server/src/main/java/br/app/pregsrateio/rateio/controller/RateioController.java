@@ -1,4 +1,4 @@
-package br.app.pregsrateio.rateio.api;
+package br.app.pregsrateio.rateio.controller;
 
 import static org.springframework.data.domain.Sort.Direction.DESC;
 import static org.springframework.http.HttpStatus.CREATED;
@@ -22,10 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 import br.app.pregsrateio.common.aop.annotations.MDCUsuarioId;
 import br.app.pregsrateio.common.security.UsuarioLogado;
 import br.app.pregsrateio.common.validation.MongoIdValido;
-import br.app.pregsrateio.rateio.CrudRateioService;
-import br.app.pregsrateio.rateio.api.dto.AtualizacaoRateioRequest;
-import br.app.pregsrateio.rateio.api.dto.CadastroRateioRequest;
-import br.app.pregsrateio.rateio.api.dto.RateioProprioResponse;
+import br.app.pregsrateio.rateio.service.CrudRateioService;
+import br.app.pregsrateio.rateio.controller.dto.AtualizacaoRateioRequest;
+import br.app.pregsrateio.rateio.controller.dto.CadastroRateioRequest;
+import br.app.pregsrateio.rateio.controller.dto.RateioProprioResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;

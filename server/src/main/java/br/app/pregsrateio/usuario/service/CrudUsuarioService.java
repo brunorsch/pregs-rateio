@@ -1,12 +1,12 @@
-package br.app.pregsrateio.usuario;
+package br.app.pregsrateio.usuario.service;
 
 import br.app.pregsrateio.common.erros.ControleFluxoException;
-import br.app.pregsrateio.usuario.api.dto.CadastroUsuarioRequest;
+import br.app.pregsrateio.usuario.controller.dto.CadastroUsuarioRequest;
 import br.app.pregsrateio.usuario.data.Usuario;
 import br.app.pregsrateio.usuario.data.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

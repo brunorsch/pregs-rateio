@@ -1,4 +1,4 @@
-package br.app.pregsrateio.usuario.api.dto;
+package br.app.pregsrateio.usuario.controller.dto;
 
 import br.app.pregsrateio.usuario.data.Usuario;
 import lombok.AllArgsConstructor;

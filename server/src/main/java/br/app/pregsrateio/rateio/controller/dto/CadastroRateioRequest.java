@@ -1,4 +1,4 @@
-package br.app.pregsrateio.rateio.api.dto;
+package br.app.pregsrateio.rateio.controller.dto;
 
 import static br.app.pregsrateio.rateio.data.Rateio.Status.EM_ANDAMENTO;
 import static java.util.Objects.isNull;

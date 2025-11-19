@@ -4,7 +4,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Repository;
 
-import br.app.pregsrateio.usuario.CrudUsuarioService;
+import br.app.pregsrateio.usuario.service.CrudUsuarioService;
 import lombok.RequiredArgsConstructor;
 
 @Repository
