@@ -3,8 +3,8 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router/dom";
 import { router } from "./router.tsx";
 
+import "./index.scss";
 import "bootswatch/dist/litera/bootstrap.min.css";
-import "./index.css";
 
 const root = document.getElementById("root");
 

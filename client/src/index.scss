@@ -1,0 +1,18 @@
+@import "~bootstrap/scss/functions";
+
+$pregs-color: #241f4d;
+
+$navbar-dark-color: $pregs-color;
+$navbar-dark-hover-color: $pregs-color;
+$navbar-light-color: $pregs-color;
+$navbar-light-hover-color: $pregs-color;
+
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/maps";
+@import "~bootstrap/scss/mixins";
+
+@import "~bootstrap/scss/bootstrap";
+
+body {
+    font-family: "Poppins", Helvetica, sans-serif;
+}
