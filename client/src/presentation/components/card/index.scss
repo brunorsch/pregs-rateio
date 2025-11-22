@@ -1,0 +1,32 @@
+.feature-card {
+  background: #f2e6ff;
+  padding: 25px;
+  width: 230px;
+  height: 340px;
+  border-radius: 18px;
+  text-align: center;
+
+  .icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #8b5cf6;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    margin: 10px auto;
+  }
+
+  h5 {
+    font-weight: 600;
+    margin: 15px 0;
+  }
+
+  p {
+    color: #7669a4;
+    font-size: 16px;
+    line-height: 25px;
+  }
+}

@@ -10,9 +10,12 @@ $navbar-light-hover-color: $pregs-color;
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/maps";
 @import "~bootstrap/scss/mixins";
-
 @import "~bootstrap/scss/bootstrap";
 
 body {
-    font-family: "Poppins", Helvetica, sans-serif;
+  background: #fff5f3 !important;
+}
+
+* {
+  font-family: "Poppins", sans-serif !important;
 }
